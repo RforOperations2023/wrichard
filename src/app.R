@@ -1,3 +1,6 @@
+library(shiny)
+library(ggplot2)
+library(dplyr)
 
 # source backend
 source('backend/server.R')

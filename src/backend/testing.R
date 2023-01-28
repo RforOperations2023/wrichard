@@ -6,22 +6,28 @@ library(countrycode)
 
 load('data/ratings.RData')
 
-time <- 'BRtng'
+time <- 'SRtng'
 
 # should the user specify this?
 ratings_decade_viz <- ratings |> 
   filter(Byear >= 1930)
 
+p <- aes()
 # rainbow stacked hist
 ratings_decade_viz |> 
   ggplot(aes(x = .data[[time]])) +
-  geom_histogram(aes(fill = factor(Bdecade)), bins=5)# +
+  geom_histogram(p, bins=30)# +
   # scale_fill_gradient(low = "#771C19", high = "#000000")
+
+g <- geom_density
+ratings_decade_viz |> 
+  ggplot(aes(x = .data[[time]])) +
+  g()
 
 # FREQUENCY decade
 ratings_decade_viz |>
-  ggplot(aes(x=SRtng, color=Bdecade)) +
-  geom_freqpoly()
+  ggplot(aes(x=SRtng, color=factor(Bdecade))) +
+  geom_freqpoly(bins = 30)
 
 # DENSITY decade
 ratings_decade_viz |>
