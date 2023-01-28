@@ -44,6 +44,6 @@ ratings <- ratings |>
 #   summarize(count = n())
 
 # save
-save(ratings, file = 'data/ratings.RData')
+save(ratings, file = 'data/ratings.Rds')
 
 # note to self: 30921406 is my FIDE number, but they got my number wrong!
