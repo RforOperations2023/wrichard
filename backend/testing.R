@@ -1,38 +1,54 @@
 library(ggplot2)
+# library(RColorBrewer)
+library(dplyr)
 library(ggflags)
-library(magrittr)
 library(countrycode)
 
 load('data/ratings.RData')
 
-# rainbow stacked hist
-ratings %>%
-  ggplot(data=., aes(x=SRtng)) +
-  geom_histogram(aes(fill=Bdecade))
 
-# rainbow multiple lines
-ratings %>%
-  ggplot(data=., aes(x=SRtng, color=Bdecade)) +
+# should the user specify this?
+ratings_decade_viz <- ratings |> 
+  filter(Byear >= 1930)
+
+# rainbow stacked hist
+ratings_decade_viz |>
+  ggplot(aes(x = SRtng)) +
+  geom_histogram(aes(fill = factor(Bdecade))) +
+  scale_fill_gradient(low = "#771C19", high = "#000000")
+
+# FREQUENCY decade
+ratings_decade_viz |>
+  ggplot(aes(x=SRtng, color=Bdecade)) +
+  geom_freqpoly()
+
+# DENSITY decade
+ratings_decade_viz |>
+  ggplot(aes(x=SRtng, color=Bdecade)) +
   geom_density()
 
-# rainbow multiple lines BY YEAR (just for fun)
-ratings %>%
-  ggplot(data=., aes(x=SRtng, color=factor(Byear))) +
+# DENSITY year (just for fun)
+ratings_decade_viz |>
+  ggplot(aes(x=SRtng, color=factor(Byear))) +
   geom_density() +
   theme(legend.position = "none")
 
 # year vs rating
 set.seed(1234)
-ratings %>%
-  slice_sample(n = 1000) %>%
-  ggplot(data=., aes(x=Age, y=SRtng, color=Sex)) +
+ratings |>
+  slice_sample(n = 1000) |>
+  ggplot(aes(x=Age, y=SRtng, color=Sex)) +
   geom_point()
 
-rating_countries <- ratings %>%
-  group_by(Fed) %>%
+rating_countries <- ratings |>
+  group_by(Fed) |>
   summarize(players = n())
 
-rating_countries$Country = rating_countries$Fed %>%
+rating_countries$Country = rating_countries$Fed |>
   countrycode(origin = 'iso3c', destination = 'country.name')
 
 country_clean
+
+ratings |> 
+  group_by(Bdecade) |> 
+  summarize(count = n())

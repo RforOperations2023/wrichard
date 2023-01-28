@@ -7,7 +7,8 @@ library(janitor)
 ratings <- read_fwf(
   'C:/Users/brist/Downloads/players_list/players_list_foa.txt',
   col_types = 'icccccccnnnnnnnnnnf',
-  skip=1)
+  skip=1
+)
 
 # copy columns
 # needed to do this to speed up column type, which required skipping line
@@ -26,15 +27,21 @@ ratings <- ratings[,c(1:6,9,12,15,18)]
 # todo(bristow) fix some of the `Fed` column to match iso3c
 
 # clean
-ratings <- ratings %>%
+ratings <- ratings |>
   filter(
     SRtng > 0, # must have rating and rating must be above 0
     Byear > 1900 # must have valid birth year
-  ) %>%
+  ) |>
   mutate(
-    Bdecade = factor(sapply(Byear, function(x) x - x %% 10)),
+    Bdecade = sapply(Byear, function(x) x - x %% 10),
     Age = 2023 - Byear
   )
+
+# check number by birth decade
+# from this count, viz by decade should filter Bdecade >= 1930
+# ratings |> 
+#   group_by(Bdecade) |> 
+#   summarize(count = n())
 
 # save
 save(ratings, file = 'data/ratings.RData')
