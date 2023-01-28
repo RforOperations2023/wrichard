@@ -5,17 +5,26 @@
 server <- function(input, output) {
   
   # save data
-  output$ratings <- load('data/ratings.Rds')
+  ratings <- readRDS('data/ratings.Rds')
+  
+  # data reactive
+  # ratings_subset <- reactive({
+  #   req(input$time) # make sure selected
+  #   select(ratings, )
+  # })
   
   # make plot
   output$distPlot <- renderPlot({
     # generate bins based on input$bins from ui.R
-    x    <- output$ratings[[input$time]]
-    bins <- seq(min(x), max(x), length.out = input$bins + 1)
-    
-    # draw the histogram with the specified number of bins
-    hist(x, breaks = bins, col = 'darkgray', border = 'white',
-         xlab = 'ELO score',
-         main = 'test lab')
+    ggplot(
+      data = ratings, 
+      aes(x = .data[[input$time]])
+    ) +
+      geom_histogram(
+        aes(group = factor(Bdecade), fill = factor(Bdecade)),
+        bins = input$bins
+      ) +
+      xlab('ELO Score') +
+      ggtitle('test lab')
   })
 }
