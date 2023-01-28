@@ -14,8 +14,8 @@ ratings_decade_viz <- ratings |>
 # rainbow stacked hist
 ratings_decade_viz |>
   ggplot(aes(x = SRtng)) +
-  geom_histogram(aes(fill = factor(Bdecade))) +
-  scale_fill_gradient(low = "#771C19", high = "#000000")
+  geom_histogram(aes(fill = factor(Bdecade)))# +
+  # scale_fill_gradient(low = "#771C19", high = "#000000")
 
 # FREQUENCY decade
 ratings_decade_viz |>
@@ -24,14 +24,19 @@ ratings_decade_viz |>
 
 # DENSITY decade
 ratings_decade_viz |>
-  ggplot(aes(x=SRtng, color=Bdecade)) +
-  geom_density()
+  ggplot(aes(x=SRtng, group=Bdecade, color=Bdecade)) +
+  geom_density() +
+  scale_fill_binned(
+    type = "viridis"
+  )
 
 # DENSITY year (just for fun)
 ratings_decade_viz |>
-  ggplot(aes(x=SRtng, color=factor(Byear))) +
+  ggplot(aes(x=SRtng, group = Byear, color = Byear)) +
   geom_density() +
+  scale_color_continuous(low='red',high='blue') +
   theme(legend.position = "none")
+
 
 # year vs rating
 set.seed(1234)
