@@ -1,0 +1,14 @@
+name: chess_ratings_draft
+title: chess_ratings_draft
+username:
+account: bristowrichardshomework
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 8183941
+bundleId: 6794930
+url: https://bristowrichardshomework.shinyapps.io/chess_ratings_draft/
+when: 1675196004.50573
+lastSyncTime: 1675196004.50575
+asMultiple: FALSE
+asStatic: FALSE
+ignoredFiles: backend/save_data.R|backend/testing.R
