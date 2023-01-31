@@ -4,7 +4,7 @@ library(dplyr)
 library(ggflags)
 library(countrycode)
 
-load('data/ratings.RData')
+ratings <- readRDS('src/data/ratings.Rds')
 
 time <- 'SRtng'
 
