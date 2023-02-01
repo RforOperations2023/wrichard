@@ -23,10 +23,14 @@ custom_sidebar = function() {
     ),
     
     # symbolize by decade
-    checkboxInput(
-      inputId = 'decade_aes',
-      label = 'Group by birth decade',
-      value = TRUE
+    radioButtons(
+      inputId = 'group',
+      label = 'Select grouping',
+      choices = c(
+        'Birth decade' = 'Bdecade',
+        'Sex' = 'Sex',
+        'None' = 'None'
+      )
     ),
     
     # graph type

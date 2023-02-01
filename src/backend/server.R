@@ -1,6 +1,7 @@
 # all below is the default server from shiny apps
 # todo(bristow) update all!
 library(ggplot2)
+source('backend/plots.R')
 
 # Define server logic required to draw a histogram
 server <- function(input, output) {
@@ -21,42 +22,10 @@ server <- function(input, output) {
   
   # make plot
   output$distPlot <- renderPlot({
-    ggplot(
+    make_dist_plot(
       data = ratings_subset(),
-      aes(x = .data[[input$time]])
-    ) +
-    # histogram
-    if (input$plot_type == 'hist') {
-      geom_histogram(
-        if (input$decade_aes) {
-          aes(fill = Bdecade, group = Bdecade)
-        } else {
-          aes()
-        },
-        bins = input$bins
-      )
-    }
-    # density
-    else if (input$plot_type == 'dens') {
-      geom_density(
-        if (input$decade_aes) {
-          aes(color = Bdecade, group = Bdecade)
-        }
-      )
-    }
-    # frequency
-    else if (input$plot_type == 'freq') {
-      geom_freqpoly(
-        if (input$decade_aes) {
-          aes(color = factor(Bdecade))
-        },
-        bins = input$bins
-      )
-    }
+      input = input
+    )
   })
   
-  # debug text
-  # output$text <- renderText({
-  #   paste(input$Byear_range[1], input$Byear_range[2])
-  # })
 }
