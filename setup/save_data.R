@@ -33,7 +33,7 @@ ratings <- ratings |>
     Byear > 1900 # must have valid birth year
   ) |>
   mutate(
-    Bdecade = sapply(Byear, function(x) x - x %% 10),
+    Bdecade = factor(sapply(Byear, function(x) x - x %% 10)),
     Age = 2023 - Byear
   )
 
