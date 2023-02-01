@@ -12,6 +12,55 @@ time <- 'SRtng'
 ratings_decade_viz <- ratings |> 
   filter(Byear >= 1930)
 
+test <- list(
+  geom_histogram(aes(fill = Bdecade)),
+  list(
+    scale_color_viridis_d(),
+    labs(
+      subtitle = 'test subtitle',
+      caption = 'test caption'
+    )
+  )
+)
+
+test_list <- list(
+  'plot_type' = 'hist',
+  'group' = 'Bdecade',
+  'bins' = 20
+)
+
+ggplot(ratings_decade_viz, aes(x = SRtng)) +
+  list(
+    list(
+      geom_histogram(
+        aes(fill = if(!is.null(.group)) .data[[.group]]),
+        bins = .bins
+      ),
+      labs(title = 'Chess ELO Rating Histogram Plot'),
+      scale_fill_viridis_d()
+    ),
+    theme_classic(),
+    labs(
+      subtitle = 'test subtitle',
+      caption = 'test caption'
+    )
+  )
+
+plot_test_options <- list(
+  # histogram
+  'hist' = list(
+    geom_histogram(
+      aes(fill = if(.group != 'None') {.data[[.group]]}),
+      bins = .bins
+    ),
+    labs(title = 'Chess ELO Rating Histogram Plot'),
+    scale_fill_viridis_d()
+  )
+)
+
+ggplot(ratings_decade_viz, aes(x = SRtng)) +
+  geom_histogram(aes(fill = .data[['Bdecade']]))
+
 p <- aes()
 # rainbow stacked hist
 ratings_decade_viz |> 
@@ -64,3 +113,4 @@ country_clean
 ratings |> 
   group_by(Bdecade) |> 
   summarize(count = n())
+
