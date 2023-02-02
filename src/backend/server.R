@@ -2,28 +2,31 @@
 # todo(bristow) update all!
 library(ggplot2)
 source('backend/plots.R')
+source('backend/data_handling.R')
 
 # Define server logic required to draw a histogram
 server <- function(input, output) {
   
-  # save data
-  ratings <- readRDS('data/ratings.Rds')
+  # create data object
+  data = list()
   
-  # data reactive
-  ratings_subset <- reactive({
-    req(input$Byear_range) # make sure selected
-    ratings |> 
-      filter(
-        Byear >= input$Byear_range[[1]],
-        Byear <= input$Byear_range[[2]]
-      ) %>%
-      return()
-  })
+  # add ratings base dataframe
+  data$ratings <- readRDS('data/ratings.Rds')
+  
+  # reactive subset data
+  data$ratings_subset <- reactive(
+    # from data_handling.R
+    make_data_subset(
+      data = data$ratings,
+      input = input
+    )
+  )
   
   # make plot
   output$distPlot <- renderPlot({
+    # from plots.R
     make_dist_plot(
-      data = ratings_subset(),
+      data = data$ratings_subset(),
       input = input
     )
   })

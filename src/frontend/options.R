@@ -1,4 +1,4 @@
-custom_sidebar = function() {
+custom_sidebar <- function() {
   # I wanted these options to exist separately from the ui script
   
   sidebarPanel(
@@ -22,14 +22,28 @@ custom_sidebar = function() {
       sep = ''
     ),
     
-    # symbolize by decade
+    # select grouping
     radioButtons(
       inputId = 'group',
       label = 'Select grouping',
       choices = c(
         'Birth decade' = 'Bdecade',
         'Sex' = 'Sex',
+        'Federation' = 'Fed',
         'None' = 'None'
+      )
+    ),
+    
+    # select country if country is selected
+    conditionalPanel(
+      condition = "input.group == 'Fed'",
+      selectizeInput(
+        inputId = 'fed_selected',
+        label = 'Select Federations (max 5)',
+        choices = c('USA', 'RUS','IND'),
+        selected = c('USA', 'RUS','IND'),
+        multiple = TRUE,
+        options = list(maxItems = 5)
       )
     ),
     
