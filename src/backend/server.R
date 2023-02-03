@@ -1,6 +1,5 @@
 # all below is the default server from shiny apps
 # todo(bristow) update all!
-library(ggplot2)
 source('backend/plots.R')
 source('backend/data_handling.R')
 
