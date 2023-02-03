@@ -40,8 +40,8 @@ custom_sidebar <- function() {
       selectizeInput(
         inputId = 'fed_selected',
         label = 'Select Federations (max 5)',
-        choices = c('USA', 'RUS','IND'),
-        selected = c('USA', 'RUS','IND'),
+        choices = readRDS('data/federations.Rds'),
+        selected = c('USA', 'RUS', 'IND'),
         multiple = TRUE,
         options = list(maxItems = 5)
       )

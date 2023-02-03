@@ -1,6 +1,3 @@
-# below is default ui!
-# todo(bristow) update all
-
 # source script to create options
 source('frontend/options.R')
 # custom_sidebar(): function yielding sidebar options

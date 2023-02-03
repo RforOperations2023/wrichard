@@ -37,13 +37,17 @@ ratings <- ratings |>
     Age = 2023 - Byear
   )
 
-# check number by birth decade
-# from this count, viz by decade should filter Bdecade >= 1930
-# ratings |> 
-#   group_by(Bdecade) |> 
-#   summarize(count = n())
-
-# save
+# save data
 saveRDS(ratings, file = 'src/data/ratings.Rds')
+
+# make list of all distinct countries
+# I was struggling to make this in the server side but still pass it 
+# to the ui side, so I'm just saving an .Rds object. Also: it's nice 
+# to use base R for this sometimes. I always default to tidyverse 
+# select |> filter |> summarize but table() works just fine.
+ratings$Fed |>
+  table() |> 
+  names() |> 
+  saveRDS(file = 'src/data/federations.Rds')
 
 # note to self: 30921406 is my FIDE number, but they got my number wrong!

@@ -19,7 +19,7 @@ make_country_subset <- function(data, input) {
     data <- data |> 
       filter(
         is.element(
-          Fed, c('USA')
+          Fed, input$fed_selected
         )
       ) 
   }
