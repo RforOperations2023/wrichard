@@ -9,9 +9,6 @@ make_ratings_year_subset <- function(data, input) {
     return()
 }
 
-# get unique federation code list based on current data
-# todo(bristow) create this list, save to something? I guess to data$possible_feds
-
 # return data filtered
 make_country_subset <- function(data, input) {
   # only filter if group is Fed
@@ -34,4 +31,13 @@ make_data_subset <- function(data, input) {
     make_country_subset(input = input)
   
   return(data)
+}
+
+get_top_ten <- function(data, input) {
+  top_ten_tbl <- data |> 
+    arrange(desc(!!sym(input$time))) |> 
+    head(10) |> 
+    DT::datatable(options = list(lengthChange = FALSE))
+  
+  return(top_ten_tbl)
 }

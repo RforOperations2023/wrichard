@@ -1,6 +1,9 @@
 library(shiny)
 library(ggplot2)
 library(dplyr)
+library(rlang)
+library(DT)
+library(scales)
 
 # source backend
 source('backend/server.R')

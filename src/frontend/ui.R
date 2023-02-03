@@ -1,6 +1,5 @@
 # source script to create options
 source('frontend/options.R')
-# custom_sidebar(): function yielding sidebar options
 
 # Define UI for application that draws a histogram
 ui <- fluidPage(
@@ -14,7 +13,14 @@ ui <- fluidPage(
     
     # render plots
     mainPanel(
-      plotOutput("distPlot")
+      plotOutput("distribution_plot"),
+      
+      br(),
+      
+      div(
+        DT::dataTableOutput(outputId = "top_ten_tbl"),
+        style = 'font-size: 70%; width: 70%'
+      )
     )
   )
 )

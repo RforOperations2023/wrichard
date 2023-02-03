@@ -68,6 +68,13 @@ custom_sidebar <- function() {
         'Rapid' = 'RRtng',
         'Bullet' = 'BRtng'
       )
+    ),
+    
+    # display table of top ten players
+    checkboxInput(
+      inputId = 'show_tbl',
+      label = 'Show Top 10 Players',
+      value = TRUE
     )
   )
 }

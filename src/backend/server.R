@@ -1,5 +1,4 @@
-# all below is the default server from shiny apps
-# todo(bristow) update all!
+# load functions for plots and data
 source('backend/plots.R')
 source('backend/data_handling.R')
 
@@ -22,12 +21,19 @@ server <- function(input, output) {
   )
   
   # make plot
-  output$distPlot <- renderPlot({
+  output$distribution_plot <- renderPlot({
     # from plots.R
     make_dist_plot(
       data = data$ratings_subset(),
       input = input
     )
   })
+  
+  # make top ten table
+  output$top_ten_tbl <- DT::renderDataTable(
+    if(input$show_tbl){
+      get_top_ten(data$ratings_subset(), input)
+    }
+  )
   
 }
