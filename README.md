@@ -1,3 +1,3 @@
 # Homework 1: Data Dashboard
 
-Homework 1 for R Shiny for Operations Management
+This dashboard visualizes data for all chess players registered with the International Chess Federation (FIDE). The dashboard can be viewed [here](https://bristowrichardshomework.shinyapps.io/Chess-Ratings-Dashboard/).

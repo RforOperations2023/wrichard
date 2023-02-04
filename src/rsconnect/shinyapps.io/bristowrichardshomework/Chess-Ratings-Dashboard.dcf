@@ -1,0 +1,13 @@
+name: Chess-Ratings-Dashboard
+title: Chess-Ratings-Dashboard
+username:
+account: bristowrichardshomework
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 8220719
+bundleId: 6808488
+url: https://bristowrichardshomework.shinyapps.io/Chess-Ratings-Dashboard/
+when: 1675473818.29799
+lastSyncTime: 1675473818.298
+asMultiple: FALSE
+asStatic: FALSE
