@@ -36,8 +36,16 @@ make_data_subset <- function(data, input) {
 get_top_ten <- function(data, input) {
   top_ten_tbl <- data |> 
     arrange(desc(!!sym(input$time))) |> 
-    head(10) |> 
-    DT::datatable(options = list(lengthChange = FALSE))
+    head(10) 
   
   return(top_ten_tbl)
+}
+
+make_top_datatable <- function(top_ten) {
+  dt <- top_ten |> 
+    DT::datatable(
+      options = list(lengthChange = FALSE)
+    )
+  
+  return(dt)
 }

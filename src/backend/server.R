@@ -20,6 +20,14 @@ server <- function(input, output) {
     )
   )
   
+  # save top ten to an object
+  data$top_ten <- reactive(
+    get_top_ten(
+      data$ratings_subset(), 
+      input
+    )
+  )
+  
   # make plot
   output$distribution_plot <- renderPlot({
     # from plots.R
@@ -32,7 +40,19 @@ server <- function(input, output) {
   # make top ten table
   output$top_ten_tbl <- DT::renderDataTable(
     if(input$show_tbl){
-      get_top_ten(data$ratings_subset(), input)
+      make_top_datatable(
+        data$top_ten()
+      )
+    }
+  )
+  
+  # make top ten download
+  output$download_data <- downloadHandler(
+    filename = function() {
+      paste("data-", Sys.Date(), ".csv", sep="")
+    },
+    content = function(file) {
+      write.csv(data$top_ten(), file)
     }
   )
   
