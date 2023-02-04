@@ -1,7 +1,12 @@
+blurb <- readLines('frontend/blurb.txt')
+
 custom_sidebar <- function() {
   # I wanted these options to exist separately from the ui script
   
   sidebarPanel(
+    
+    # blurb
+    h5(blurb),
     
     # number of bins
     sliderInput(
@@ -75,6 +80,12 @@ custom_sidebar <- function() {
       inputId = 'show_tbl',
       label = 'Show Top 10 Players',
       value = TRUE
+    ),
+    
+    # download button
+    downloadButton(
+      outputId = 'download_data',
+      label = 'Download Top 10 Players'
     )
   )
 }
